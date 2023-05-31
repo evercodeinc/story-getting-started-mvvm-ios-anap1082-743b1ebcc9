@@ -9,7 +9,7 @@ class MainViewModel {
     
     weak var delegate: MainViewModelDelegate?
     private let service: ServiceProtocol
-
+    
     init(delegate: MainViewModelDelegate, service: ServiceProtocol = Service()) {
         
         self.delegate = delegate
@@ -17,7 +17,8 @@ class MainViewModel {
     }
     
     func fetchItems() {
-        
-        // TODO
+        service.fetchData { items in
+            delegate?.didFetchItems(items: items ?? [])
+        }
     }
 }
